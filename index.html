@@ -4,16 +4,28 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
 <body>
     <Header>
-        <h1>Le pendaison Crémallère</h1>
+        <h1>Le mordu</h1>
     </Header>
     <main>
-        <h2>Assisterez-vous à la pendaison ? </h2>
+        <h2>à vous de deviner !</h2>
+        <div class="box_word" id="wordToGuess">
+            <ul id="letters" class="letters"></ul>
+        </div>
+        <div class="counter_box" id="counter_in">
+            <p id="counter_p">Stay: <span id="counter"></span> attemps.</p>
+        </div>
+        <div>
+            <input type="text" id="letter" class="letter_in">
+            <input type="submit" name="submit" id="submit" value="Try">
+        </div>
 
-        
     </main>
+    <script src="index.js"></script>
 </body>
 </html>
