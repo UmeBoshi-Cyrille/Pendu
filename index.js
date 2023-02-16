@@ -3,6 +3,8 @@ var words = ["CAROTTE", "PATATE", "FROMAGE", "ROBLOCHON", "ORDINATEUR",
     "PYTHON", "POTIRON", "PENDU", "CUCURBITACEES", "COUSCOUS", "COURGETTE",
     "PATATE", "VERRE", "LETTRE", "ECONOMIE", "ALGORITHMIQUE", "MICRO"]
 
+var word;
+
 // INPUTS
 var startBtn = document.getElementById("startBtn")
 var resetBtn = document.getElementById("resetBtn")
@@ -12,7 +14,7 @@ var letterInput = document.getElementById("letterInput")
 // DISPLAY
 var counterTxt = document.getElementById("counterTxt")
 var word_list = document.getElementById("word_list")
-var messages = document.getElementById("messages")
+var messages_box = document.getElementById("messages")
 var checkTitle = document.getElementById("checkTitle")
 var checkedLetter = document.getElementById("checkedLetter")
 
@@ -24,41 +26,38 @@ var messages = {
     start: 'Veuillez démarrer le jeu en appuyant sur le bouton "Start".'
 }
 
-
-
 // Variables
 var counter = 9;
 var checkedList = []
-var splitWord = []
 var started = false;
 
-let regex = /[A-Z]/g;
 
 
+window.onload = init();
 
 function init() {
-    let word = words[randomWord()]
-    words = []
-    console.log(word)
-    splitword = word.split("");
-    console.log(splitWord)
-    displayRandomWord(word)
+    word = words[randomWord()];
+    words = [];
+    console.log(word);
+    let arrayWord = word.split("");
+    console.log(arrayWord);
 
-    startBtn.onclick = function() { startGame(word) }
+    displayRandomWord(arrayWord);
+
+    startBtn.onclick = startGame(arrayWord);
 
     if (started == true) {
-
+        if (checkLetter())
     } else {
 
     }
 }
 
-window.onload = init()
-
 function startGame(word) {
     started = true;
+    let li = document.getElementsByClassName('li_letter');
     for (let i = 0; i < word.length; i++) {
-        document.getElementsByClassName('li_letter')[i].style.visibility = 'visible';
+        li[i].style.visibility = 'visible';
     }
 }
 
@@ -67,7 +66,6 @@ function randomWord() {
 }
 
 function displayRandomWord(word) {
-    word.split()
     for (let i = 0; i < word.length; i++) {
         let li = document.createElement('li')
         let span = document.createElement('span')
@@ -85,5 +83,20 @@ function guess() {
 }
 
 function checkLetter(letter) {
+    let regex = /[A-Z]/g;
+    if (String(letter).match(regex) && String(letter).length === 1) {
+        if (checkedList.includes(letter)) {
+            messages_box.innerHTML = messages.guessed;
+            return false
+        } else {
+            messages_box.innerHTML = ""
+            return true
+        }
+    }
+    messages_box.innerHTML = messages.notValid;
+    return false
+}
+
+function displayLetter() {
 
 }
