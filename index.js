@@ -16,7 +16,7 @@ var counterTxt = document.getElementById("counterTxt")
 var word_list = document.getElementById("word_list")
 var messages_box = document.getElementById("messages")
 var checkTitle = document.getElementById("checkTitle")
-var checkedLetter = document.getElementById("checkedLetter")
+var checkedLetters = document.getElementById("checkedLetter")
 
 var messages = {
     win: 'Enfin libre !',
@@ -31,8 +31,6 @@ var counter = 9;
 var checkedList = []
 var started = false;
 
-
-
 window.onload = init();
 
 function init() {
@@ -41,16 +39,41 @@ function init() {
     console.log(word);
     let arrayWord = word.split("");
     console.log(arrayWord);
+    letterInput.value = "";
+
+
 
     displayRandomWord(arrayWord);
 
-    startBtn.onclick = startGame(arrayWord);
+    startBtn.onclick = function () {
+        messages_box.innerText = "";
+        startGame(arrayWord)
+        console.log(started)
+    };
 
-    if (started == true) {
-        if (checkLetter())
-    } else {
 
+    submitBtn.onclick = function () {
+        let letter_value = String(letterInput.value).toUpperCase();
+        letterInput.value = "";
+        console.log(letter_value);
+        if (started === true) {
+            checkedList.push(letter_value)
+            console.log(checkedList);
+            displayLetter(checkedList);
+            if (checkLetter(letter_value)) {
+                guess(letter_value, arrayWord, counter);
+            }
+
+        } else {
+            letter_value = "";
+            console.log(letter_value);
+            messages_box.innerText = messages.start;
+        }
     }
+
+
+
+
 }
 
 function startGame(word) {
@@ -67,36 +90,50 @@ function randomWord() {
 
 function displayRandomWord(word) {
     for (let i = 0; i < word.length; i++) {
-        let li = document.createElement('li')
-        let span = document.createElement('span')
-        span.innerHTML = word[i]
-        span.style.visibility = 'hidden'
-        li.style.visibility = 'hidden'
-        li.className = 'li_letter'
-        li.appendChild(span)
-        word_list.appendChild(li)
+        let li = document.createElement('li');
+        let span = document.createElement('span');
+        span.innerHTML = word[i];
+        span.className = "span_letter";
+        span.style.visibility = 'hidden';
+        li.style.visibility = 'hidden';
+        li.className = 'li_letter';
+        li.appendChild(span);
+        word_list.appendChild(li);
     }
 }
 
-function guess() {
-
+function guess(letter, word, counter) {
+    let spanLetter = document.getElementsByClassName('span_letter');
+    for (let i = 0; i < word.length; i++) {
+        if (word[i] === letter) {
+            spanLetter[i].style.visibility = 'visible';
+        } else {
+            decrement(counter);
+        }
+    }
 }
 
 function checkLetter(letter) {
     let regex = /[A-Z]/g;
     if (String(letter).match(regex) && String(letter).length === 1) {
         if (checkedList.includes(letter)) {
-            messages_box.innerHTML = messages.guessed;
+            messages_box.innerText = messages.guessed;
             return false
         } else {
-            messages_box.innerHTML = ""
+            messages_box.innerText = ""
             return true
         }
     }
-    messages_box.innerHTML = messages.notValid;
+    messages_box.innerText = messages.notValid;
     return false
 }
 
-function displayLetter() {
+function displayLetter(letters) {
+    letters.sort();
+    checkTitle.innerText = "Vous avez déjà tenté :";
+    checkedLetters.innerText = letters.join(" ");
+}
 
+function decrement(counter) {
+    counter--;
 }
