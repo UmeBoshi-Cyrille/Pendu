@@ -92,7 +92,7 @@ main .checked_box {
 }
 main .checked_box .checkTitle,
 main .checked_box .checkedLetter {
-  font-size: 28px;
+  font-size: 32px;
 }
 main .checked_box .checkTitle {
   margin-bottom: 15px;

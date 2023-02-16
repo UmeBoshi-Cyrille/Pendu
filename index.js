@@ -57,18 +57,22 @@ function init() {
         letterInput.value = "";
         console.log(letter_value);
         if (started === true) {
-            checkedList.push(letter_value)
-            console.log(checkedList);
-            displayLetter(checkedList);
-            if (checkLetter(letter_value)) {
-                guess(letter_value, arrayWord, counter);
-            }
+            // checkedList.push(letter_value)
+            // console.log(checkedList);
 
+            if (checkLetter(letter_value)) {
+                checkedList.push(letter_value)
+                guess(letter_value, arrayWord, counter);
+            } else {
+                checkedList.push(letter_value)
+            }
         } else {
             letter_value = "";
             console.log(letter_value);
             messages_box.innerText = messages.start;
         }
+
+        displayLetter(checkedList);
     }
 
 
