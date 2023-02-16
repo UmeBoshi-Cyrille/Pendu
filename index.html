@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="reset.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="CSS/reset.css">
+    <link rel="stylesheet" href="CSS/style.css">
     <title>Document</title>
 </head>
 <body>
@@ -13,18 +13,30 @@
         <h1>Le mordu</h1>
     </Header>
     <main>
-        <h2>à vous de deviner !</h2>
-        <div class="box_word" id="wordToGuess">
-            <ul id="letters" class="letters"></ul>
+        <div class="title_box" id="title_box">
+            <h2>à vous de jouer.</h2>
+            <form action="" class="title_inputs">
+                <input type="submit" name="startBtn" id="startBtn" class="startBtn" value="Start">
+                <input type="submit" name="resetBtn" id="resetBtn" class="resetBtn" value="Reset">
+            </form>
         </div>
-        <div class="counter_box" id="counter_in">
-            <p id="counter_p">Stay: <span id="counter"></span> attemps.</p>
+        <div class="counter_box" id="counter_box">
+            <p id="counterTxt">Stay: </p>
         </div>
-        <div>
-            <input type="text" id="letter" class="letter_in">
-            <input type="submit" name="submit" id="submit" value="Try">
+        <div class="word_box" id="word_box">
+            <ul id="word_list" class="word_list"></ul>
         </div>
-
+        <div id="messages_box" class="messages_box">
+            <p id="messages"></p>
+        </div>
+        <div class="letter_box" id="letter_box">
+            <input type="text" id="letterInput" class="letterInput">
+            <input type="submit" name="submitBtn" id="submitBtn" class="submitBtn" value="Try">
+        </div>
+        <div class="checked_box" id="checked_box">
+            <h4 id="checkTitle" class="checkTitle"></h4>
+            <p id="checkedLetter" class="checkedLetter"></p>
+        </div>
     </main>
     <script src="index.js"></script>
 </body>

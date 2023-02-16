@@ -1,0 +1,113 @@
+header,
+main,
+div,
+ul,
+.title_box,
+.counter_box,
+.word_box,
+.messages_box,
+.letter_box,
+.checked_box,
+.title_inputs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+header {
+  height: 150px;
+}
+header h1 {
+  font-size: 74px;
+}
+
+main,
+.title_box,
+.letter_box,
+.checked_box {
+  flex-direction: column;
+}
+
+main {
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 75rem;
+  width: 100%;
+}
+main div {
+  width: 100%;
+}
+main ul,
+main .title_inputs {
+  flex-direction: row;
+}
+main .title_box,
+main .letter_box,
+main .checked_box {
+  height: 150px;
+}
+main .title_box {
+  font-size: 48px;
+}
+main .counter_box {
+  height: 50px;
+  font-size: 28px;
+}
+main .word_box {
+  height: 150px;
+  color: red;
+}
+main .word_box li {
+  margin-left: 12px;
+  margin-right: 12px;
+  border-bottom: 2px solid black;
+  font-size: 56px;
+  text-align: center;
+}
+main .word_box .li_letter {
+  border-bottom: 2px solid black;
+  width: 40px;
+}
+main .messages_box {
+  height: 30px;
+  font-size: 20px;
+  color: red;
+}
+main .letter_box .letterInput {
+  width: 70px;
+  height: 70px;
+  text-align: center;
+  text-transform: uppercase;
+}
+main .checked_box .checkTitle,
+main .checked_box .checkedLetter {
+  font-size: 38px;
+}
+main .checked_box .checkTitle {
+  margin-bottom: 15px;
+}
+main input[type=submit] {
+  height: 50px;
+  width: 250px;
+}
+main .resetBtn,
+main .startBtn,
+main .submitBtn {
+  border-color: rgb(245, 236, 220);
+  background-color: rgb(233, 214, 163);
+  font-size: 22px;
+}
+main .resetBtn,
+main .startBtn,
+main .submitBtn {
+  margin-top: 20px;
+}
+main .resetBtn {
+  border-radius: 0 0 50px 0px;
+}
+main .startBtn {
+  border-radius: 0 0 0px 50px;
+}
+main .submitBtn {
+  border-radius: 50px 50px 0 0;
+}/*# sourceMappingURL=style.css.map */
