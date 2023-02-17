@@ -90,9 +90,11 @@ main .checked_box {
   height: 100px;
   justify-content: flex-start;
 }
-main .checked_box .checkTitle,
+main .checked_box .checkTitle {
+  font-size: 26px;
+}
 main .checked_box .checkedLetter {
-  font-size: 32px;
+  font-size: 42px;
 }
 main .checked_box .checkTitle {
   margin-bottom: 15px;

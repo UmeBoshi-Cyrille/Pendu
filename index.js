@@ -14,6 +14,7 @@ var letterInput = document.getElementById("letterInput")
 // DISPLAY
 var counterTxt = document.getElementById("counterTxt")
 var word_list = document.getElementById("word_list")
+var box_messages = document.getElementById("messages_box")
 var messages_box = document.getElementById("messages")
 var checkTitle = document.getElementById("checkTitle")
 var checkedLetters = document.getElementById("checkedLetter")
@@ -27,13 +28,15 @@ var messages = {
 }
 
 // Variables
-var counter = 9;
+var counter;
 var checkedList = []
 var started = false;
+var win = false;
 
 window.onload = init();
 
 function init() {
+    counter = 9;
     word = words[randomWord()];
     words = [];
     console.log(word);
@@ -41,43 +44,41 @@ function init() {
     console.log(arrayWord);
     letterInput.value = "";
 
-
-
     displayRandomWord(arrayWord);
+
+    resetBtn.onclick = function () {
+        reset();
+    }
 
     startBtn.onclick = function () {
         messages_box.innerText = "";
         startGame(arrayWord)
-        console.log(started)
+        counterTxt.innerText = "Il vous reste " + counter + " tentatives."
     };
-
 
     submitBtn.onclick = function () {
         let letter_value = String(letterInput.value).toUpperCase();
         letterInput.value = "";
         console.log(letter_value);
-        if (started === true) {
-            // checkedList.push(letter_value)
-            // console.log(checkedList);
 
+        if (started === true) {
             if (checkLetter(letter_value)) {
-                checkedList.push(letter_value)
-                guess(letter_value, arrayWord, counter);
-            } else {
-                checkedList.push(letter_value)
+                checkedList.push(letter_value);
+                displayLetter(checkedList);
+                guessLetter(letter_value, arrayWord)
             }
         } else {
             letter_value = "";
-            console.log(letter_value);
             messages_box.innerText = messages.start;
         }
-
-        displayLetter(checkedList);
     }
 
-
-
-
+    if (started === true) {
+        let spanLetter = document.querySelectorAll('span_letter');
+        if (spanLetter.style.visibility = "visible")
+            win = true;
+        endGame()
+    }
 }
 
 function startGame(word) {
@@ -106,14 +107,17 @@ function displayRandomWord(word) {
     }
 }
 
-function guess(letter, word, counter) {
+function guessLetter(letter, word) {
     let spanLetter = document.getElementsByClassName('span_letter');
     for (let i = 0; i < word.length; i++) {
         if (word[i] === letter) {
             spanLetter[i].style.visibility = 'visible';
-        } else {
-            decrement(counter);
         }
+    }
+
+    if (!word.includes(letter)) {
+        counter--;
+        counterTxt.innerText = "Il vous reste " + counter + " tentatives."
     }
 }
 
@@ -138,6 +142,29 @@ function displayLetter(letters) {
     checkedLetters.innerText = letters.join(" ");
 }
 
-function decrement(counter) {
-    counter--;
+function reset() {
+    started = false;
+    messages_box.innerText = "";
+    counterTxt.innerText = "";
+    checkTitle.innerText = "";
+    checkedLetters.innerText = "";
+    checkedList = [];
+    counter = 9;
+    let li = document.getElementsByClassName('li_letter');
+    for (let i = 0; i < word.length; i++) {
+        li[i].style.visibility = 'hidden';
+    }
+}
+
+function endGame() {
+    if (win === true) {
+        box_messages.style.height = "500px";
+        box_messages.style.fontSize = "120px";
+        messages_box.innerText = messages.win;
+    }
+    else if (counter === 0) {
+        box_messages.style.height = "500px";
+        box_messages.style.fontSize = "120px";
+        messages_box.innerText = messages.lose;
+    }
 }

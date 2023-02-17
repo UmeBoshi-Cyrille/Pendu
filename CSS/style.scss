@@ -100,9 +100,12 @@ main {
     .checked_box {
         height: 100px;
         justify-content: flex-start;
-        .checkTitle,
+
+        .checkTitle {
+            font-size: 26px;
+        }
         .checkedLetter {
-            font-size: 32px;
+            font-size: 42px;
         }
 
         .checkTitle {
