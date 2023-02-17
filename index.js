@@ -18,6 +18,8 @@ var box_messages = document.getElementById("messages_box")
 var messages_box = document.getElementById("messages")
 var checkTitle = document.getElementById("checkTitle")
 var checkedLetters = document.getElementById("checkedLetter")
+var loseGif = document.getElementById("lose")
+var winGif = document.getElementById("win")
 
 var messages = {
     win: 'Enfin libre !',
@@ -30,10 +32,15 @@ var messages = {
 // Variables
 var counter;
 var checkedList = []
+var matchedLetters = []
 var started = false;
-var win = false;
 
 window.onload = init();
+
+resetBtn.onclick = function (event) {
+    event.preventDefault();
+    location.reload();
+}
 
 function init() {
     counter = 9;
@@ -46,15 +53,23 @@ function init() {
 
     displayRandomWord(arrayWord);
 
-    resetBtn.onclick = function () {
-        reset();
-    }
+    // messages_box.innerText = "";
+    // startGame(arrayWord)
+    // counterTxt.innerText = "Il vous reste " + counter + " tentatives."
 
     startBtn.onclick = function () {
         messages_box.innerText = "";
         startGame(arrayWord)
         counterTxt.innerText = "Il vous reste " + counter + " tentatives."
     };
+
+    letterInput.addEventListener("keypress", function (event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            submitBtn.click();
+        }
+    });
+
 
     submitBtn.onclick = function () {
         let letter_value = String(letterInput.value).toUpperCase();
@@ -66,18 +81,13 @@ function init() {
                 checkedList.push(letter_value);
                 displayLetter(checkedList);
                 guessLetter(letter_value, arrayWord)
+                console.log("array" + arrayWord);
+                endGame(arrayWord, matchedLetters)
             }
         } else {
             letter_value = "";
             messages_box.innerText = messages.start;
         }
-    }
-
-    if (started === true) {
-        let spanLetter = document.querySelectorAll('span_letter');
-        if (spanLetter.style.visibility = "visible")
-            win = true;
-        endGame()
     }
 }
 
@@ -112,6 +122,8 @@ function guessLetter(letter, word) {
     for (let i = 0; i < word.length; i++) {
         if (word[i] === letter) {
             spanLetter[i].style.visibility = 'visible';
+            matchedLetters.push(letter);
+            console.log("match" + matchedLetters);
         }
     }
 
@@ -142,29 +154,19 @@ function displayLetter(letters) {
     checkedLetters.innerText = letters.join(" ");
 }
 
-function reset() {
-    started = false;
-    messages_box.innerText = "";
-    counterTxt.innerText = "";
-    checkTitle.innerText = "";
-    checkedLetters.innerText = "";
-    checkedList = [];
-    counter = 9;
-    let li = document.getElementsByClassName('li_letter');
-    for (let i = 0; i < word.length; i++) {
-        li[i].style.visibility = 'hidden';
-    }
-}
-
-function endGame() {
-    if (win === true) {
-        box_messages.style.height = "500px";
+function endGame(word, matchLetter) {
+    if (word.length === matchLetter.length) {
+        box_messages.style.height = "750px";
         box_messages.style.fontSize = "120px";
+        messages_box.style.marginBottom = "20px";
+        winGif.style.display = "block";
         messages_box.innerText = messages.win;
-    }
-    else if (counter === 0) {
-        box_messages.style.height = "500px";
+
+    }  else if (counter === 0) {
+        box_messages.style.height = "750px";
         box_messages.style.fontSize = "120px";
+        messages_box.style.marginBottom = "20px";
+        loseGif.style.display = "block";
         messages_box.innerText = messages.lose;
     }
 }

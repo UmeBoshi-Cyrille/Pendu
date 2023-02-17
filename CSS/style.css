@@ -24,6 +24,7 @@ header h1 {
 main,
 .title_box,
 .letter_box,
+.messages_box,
 .checked_box {
   flex-direction: column;
 }
@@ -76,6 +77,11 @@ main .messages_box {
   border-bottom: 1px solid black;
   color: red;
 }
+main .messages_box img {
+  width: 500px;
+  height: 400px;
+  display: none;
+}
 main .letter_box {
   height: 200px;
 }
@@ -94,7 +100,7 @@ main .checked_box .checkTitle {
   font-size: 26px;
 }
 main .checked_box .checkedLetter {
-  font-size: 42px;
+  font-size: 40px;
 }
 main .checked_box .checkTitle {
   margin-bottom: 15px;
